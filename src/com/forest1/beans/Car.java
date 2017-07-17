@@ -5,6 +5,10 @@ public class Car {
 		System.out.println("无参构造");
 	}
 	
+	public void drive() {
+		System.out.println("开车");
+	}
+	
 	public void myInit() {
 		System.out.println("创建了");
 	}

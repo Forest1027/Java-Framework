@@ -15,8 +15,12 @@ public class MyProcessor implements BeanPostProcessor{
 			
 			@Override
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-				System.out.println("系好安全带");
-				Object result = method.invoke(arg0, args);
+				Object result = null;
+				//如果调用的是drive方法，那么就输出语句
+				if ("drive".equals(method.getName())) {
+					System.out.println("系好安全带");
+					result = method.invoke(arg0, args);
+				}
 				return result;
 			}
 		});
