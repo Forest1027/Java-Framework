@@ -2,15 +2,25 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
         "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans>
-	<bean id="userService" class="com.forest1.beans.UserServiceImp">
+	<!-- <bean id="userService" class="com.forest1.beans.UserServiceImp">
 		<property name="info" value="forest"></property>
 	</bean>
 	<bean name="bean1" class="com.forest1.factory.Bean1Factory"
 		factory-method="createBean1">
 	</bean>
 	<bean name="bean2" class="com.forest1.beans.Bean1"></bean>
-	<!-- 实例工厂方法 -->
+	实例工厂方法
 	<bean name="bean2Factory" class="com.forest1.factory.Bean2Factory"></bean>
-	<bean name="bean3" factory-bean="bean2Factory" factory-method="createBean1"></bean>
-	<bean id="car1" class="com.forest1.beans.Car" init-method="myInit" destroy-method="myDestroy"></bean>
+	<bean name="bean3" factory-bean="bean2Factory" factory-method="createBean1"></bean> -->
+	<bean id="car1" class="com.forest1.beans.Car" init-method="myInit" destroy-method="myDestroy">
+		<constructor-arg index="0" value="劳斯莱斯"></constructor-arg>
+		<constructor-arg index="1" value="100000000"></constructor-arg>
+	</bean>
+<!-- 	<bean class="com.forest1.factory.MyProcessor"></bean> -->
+	<!-- setter注入 -->
+	<bean id="person" class="com.forest1.beans.Person">
+		<property name="name" value="Forest"/>
+		<!-- 注意这里的ref属性，用于引用另外一个对象 -->
+		<property name="car" ref="car1"/>
+	</bean>
 </beans>

@@ -15,13 +15,14 @@ public class MyProcessor implements BeanPostProcessor{
 			
 			@Override
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-				Object result = null;
+				//Object result = null;
 				//如果调用的是drive方法，那么就输出语句
 				if ("drive".equals(method.getName())) {
 					System.out.println("系好安全带");
-					result = method.invoke(arg0, args);
+					Object result = method.invoke(arg0, args);
+					return result;
 				}
-				return result;
+				return null;
 			}
 		});
 		return proxy;
@@ -30,7 +31,7 @@ public class MyProcessor implements BeanPostProcessor{
 	@Override
 	public Object postProcessBeforeInitialization(Object arg0, String arg1) throws BeansException {
 		System.out.println("before");
-		return null;
+		return arg0;
 	}
 
 }
