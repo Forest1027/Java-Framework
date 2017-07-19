@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 注解开发 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"><!-- bean definitions here -->
+	<!-- 定义目标 -->
+	<bean id="studentService" class="com.forest3.service.StudentService"></bean>
+	<!-- 定义通知 -->
+	<bean id="linAdvice" class="com.forest3.advice.LinAdvice"></bean>
+	<bean id="teacherAdvice" class="com.forest3.advice.TeacherAdvice"></bean>
+	<!-- 前置通知 -->
+	<aop:config>
+		<aop:aspect ref="linAdvice">
+		<!-- 前置 -->
+			<aop:before method="check"
+				pointcut="execution(* com.forest3.service.StudentService.*(..))"></aop:before>
+			<aop:around method="work"
+				pointcut="execution(* com.forest3.service.StudentService.work(..))"></aop:around>
+		</aop:aspect>
+		<aop:aspect ref="teacherAdvice">
+		<!-- 后置 -->
+			<aop:after-returning method="answer"
+				pointcut="execution(* com.forest3.service.StudentService.study(..))"></aop:after-returning>
+		</aop:aspect>
+		<aop:aspect ref="teacherAdvice">
+		<!-- 抛出 -->
+			<aop:after-throwing method="exam"
+				pointcut="execution(* com.forest3.service.StudentService.study(..))"></aop:after-throwing>
+		</aop:aspect>
+		<aop:aspect ref="teacherAdvice">
+				<aop:after method="exam" pointcut="execution(* com.forest3.service.StudentService.study(..))"></aop:after>
+		</aop:aspect>
+	</aop:config>
+</beans>
