@@ -10,8 +10,13 @@
          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"> 
       <!-- bean definitions here -->
       
-      <context:component-scan base-package="com.forest4"/>
-      <aop:aspectj-autoproxy proxy-target-class="true"/>
+      <!-- jdbc -->
+  <context:property-placeholder location="classpath:db.properties"/>
+  <import resource="./aop2.xml"/>
+  <import resource="./aop3.xml"/>
+      <!-- Spring AOP基于注解的方式 -->
+      <!-- <context:component-scan base-package="com.forest4"/>
+      <aop:aspectj-autoproxy proxy-target-class="true"/> -->
       
 	<!-- Spring AOP基于xml的方式
 	<import resource="./aop1.xml"/> -->
